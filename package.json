@@ -17,12 +17,9 @@
   "author": "Giacomo Rebonato",
   "license": "ISC",
   "devDependencies": {
-    "@fastify/express": "^2.3.0",
-    "@fastify/static": "^6.10.2",
     "@tsconfig/node20": "^1.0.2",
     "@types/node": "^20.3.3",
     "del-cli": "^5.0.0",
-    "fastify": "^4.19.0",
     "prettier-plugin-packagejson": "^2.4.3",
     "release-it": "^15.11.0",
     "typescript": "^5.1.6",
