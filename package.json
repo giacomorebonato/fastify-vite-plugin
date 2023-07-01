@@ -5,8 +5,8 @@
   "description": "Integrate Vite SPA into a Fastify application",
   "main": "dist/vite-plugin.js",
   "scripts": {
-    "build": "tsc",
-    "release": "release-it",
+    "build": "del dist && tsc",
+    "release": "release-it --'hooks.before:init=pnpm build'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -21,6 +21,7 @@
     "@fastify/static": "^6.10.2",
     "@tsconfig/node20": "^1.0.2",
     "@types/node": "^20.3.3",
+    "del-cli": "^5.0.0",
     "fastify": "^4.19.0",
     "prettier-plugin-packagejson": "^2.4.3",
     "release-it": "^15.11.0",
@@ -40,10 +41,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/giacomorebonato/fastify-vite-plugin.git"
-  },
-  "hooks": {
-    "before:init": [
-      "pnpm build"
-    ]
   }
 }
