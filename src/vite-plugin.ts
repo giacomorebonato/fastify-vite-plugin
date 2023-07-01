@@ -30,26 +30,28 @@ export const fastifyVitePlugin = async (
     const root = Path.join(appRoot.path, 'dist', 'assets')
     const distRoot = Path.join(appRoot.path, finalOptions.sourceDir)
     const filenames = await Fs.readdir(distRoot)
+    const indexHtml = await Fs.readFile(Path.join(distRoot, 'index.html'), 'utf-8')
 
     for (let filename of filenames) {
       const stats = await Fs.lstat(Path.join(distRoot, filename))
+      const isInteresting = interestingFiles.some((interesting) => {
+        return filename.startsWith(interesting)
+      })
 
-      if (stats.isFile() && interestingFiles.some((interesting) => {
-        filename.startsWith(interesting)
-      })) {
+      if (stats.isFile() && isInteresting) {
         fastify.get(`/${filename}`, (request, reply) => {
           reply.sendFile(filename, distRoot)
         })
       }
     }
 
-    fastify.get('*', async (request, reply) => {
-      reply.sendFile('index.html', distRoot)
-    })
-
     await fastify.register(import('@fastify/static'), {
       root,
       prefix: finalOptions.viteAssetsDir,
+    })
+
+    fastify.get('*', async (request, reply) => {
+      reply.type('text/html').send(indexHtml)
     })
   } else {
     await fastify.register(import('@fastify/express'))
