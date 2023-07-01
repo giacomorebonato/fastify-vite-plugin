@@ -41,8 +41,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/giacomorebonato/fastify-vite-plugin.git"
-  },
-  "hooks": {
-    "before:init": "pnpm build"
   }
 }
