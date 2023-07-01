@@ -1,6 +1,6 @@
 # vite-plugin-ts
 
-A Fastify plugin to integrate a Vite SPA in the current projects.  
+A Fastify plugin to integrate a Vite SPA into the current project.  
 It doesn't aim to deal with server side rendering, but you can still do that from your Fastify application.
 It's configured to not ship Vite in production and to only serve its produced assets.
 

@@ -43,6 +43,10 @@ export const fastifyVitePlugin = async (
       }
     }
 
+    fastify.get('*', async (request, reply) => {
+      reply.sendFile('index.html', distRoot)
+    })
+
     await fastify.register(import('@fastify/static'), {
       root,
       prefix: finalOptions.viteAssetsDir,
