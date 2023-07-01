@@ -6,6 +6,7 @@
   "main": "dist/vite-plugin.js",
   "scripts": {
     "build": "tsc",
+    "release": "release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
