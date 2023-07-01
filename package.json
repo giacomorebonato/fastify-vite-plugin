@@ -32,5 +32,9 @@
   "dependencies": {
     "app-root-path": "^3.1.0"
   },
-  "packageManager": "pnpm@8.6.5"
+  "packageManager": "pnpm@8.6.5",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/giacomorebonato/fastify-vite-plugin.git"
+  }
 }
