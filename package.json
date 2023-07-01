@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "fastify-vite-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Integrate Vite SPA into a Fastify application",
   "main": "dist/vite-plugin.js",
   "scripts": {
@@ -9,7 +9,11 @@
     "release": "release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["fastify", "vite", "spa"],
+  "keywords": [
+    "fastify",
+    "vite",
+    "spa"
+  ],
   "author": "Giacomo Rebonato",
   "license": "ISC",
   "devDependencies": {
@@ -38,6 +42,8 @@
     "url": "https://github.com/giacomorebonato/fastify-vite-plugin.git"
   },
   "hooks": {
-    "before:init": ["pnpm build"]
+    "before:init": [
+      "pnpm build"
+    ]
   }
 }
