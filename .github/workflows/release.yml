@@ -10,7 +10,7 @@ jobs:
       - name: Install pnpm
         run: npm install pnpm --global
       - name: Install dependencies
-        run: pnpm ci
+        run: pnpm i --frozen-lockfile
       - name: Initialize Git user
         run: |
           git config --global user.email "grebonato@outlook.ie"
