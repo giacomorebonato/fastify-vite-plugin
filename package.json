@@ -1,0 +1,35 @@
+{
+  "type": "module",
+  "name": "fastify-vite-plugin",
+  "version": "1.0.0",
+  "description": "Integrate Vite SPA into a Fastify application",
+  "main": "dist/vite-plugin.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@fastify/express": "^2.3.0",
+    "@fastify/static": "^6.10.2",
+    "@tsconfig/node20": "^1.0.2",
+    "@types/node": "^20.3.3",
+    "fastify": "^4.19.0",
+    "prettier-plugin-packagejson": "^2.4.3",
+    "release-it": "^15.11.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.3.9"
+  },
+  "peerDependencies": {
+    "@fastify/express": "^2.3.0",
+    "@fastify/static": "^6.10.2",
+    "fastify": "^4.19.0",
+    "vite": "^4.3.9"
+  },
+  "dependencies": {
+    "app-root-path": "^3.1.0"
+  },
+  "packageManager": "pnpm@8.6.5"
+}
