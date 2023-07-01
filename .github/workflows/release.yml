@@ -7,6 +7,8 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
+      - name: Install pnpm
+        uses: npm install pnpm --global
       - name: Install dependencies
         run: pnpm ci
       - name: Initialize Git user
@@ -18,7 +20,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Run release
-        run: npm run release --ci
+        run: pnpm release --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
