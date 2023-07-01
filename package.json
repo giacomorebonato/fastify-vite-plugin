@@ -9,8 +9,8 @@
     "release": "release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["fastify", "vite", "spa"],
+  "author": "Giacomo Rebonato",
   "license": "ISC",
   "devDependencies": {
     "@fastify/express": "^2.3.0",
