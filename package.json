@@ -21,6 +21,7 @@
     "@playwright/test": "^1.35.1",
     "@tsconfig/node20": "^1.0.2",
     "@types/node": "^20.3.3",
+    "@vitejs/plugin-react-swc": "^3.3.2",
     "del-cli": "^5.0.0",
     "prettier-plugin-packagejson": "^2.4.3",
     "release-it": "^15.11.0",
