@@ -1,5 +1,4 @@
-* ![release workflow](https://github.com/giacomorebonato/fastify-vite-plugin/actions/workflows/release.yml/badge.svg)
-* ![playwright workflow](https://github.com/giacomorebonato/fastify-vite-plugin/actions/workflows/playwright.yml/badge.svg)
+![release workflow](https://github.com/giacomorebonato/fastify-vite-plugin/actions/workflows/release.yml/badge.svg) ![playwright workflow](https://github.com/giacomorebonato/fastify-vite-plugin/actions/workflows/playwright.yml/badge.svg)
 
 # vite-plugin-ts
 
