@@ -19,6 +19,9 @@ dependencies:
     version: 4.19.0
 
 devDependencies:
+  '@playwright/test':
+    specifier: ^1.35.1
+    version: 1.35.1
   '@tsconfig/node20':
     specifier: ^1.0.2
     version: 1.0.2
@@ -484,6 +487,17 @@ packages:
       open: 9.1.0
       picocolors: 1.0.0
       tslib: 2.6.0
+    dev: true
+
+  /@playwright/test@1.35.1:
+    resolution: {integrity: sha512-b5YoFe6J9exsMYg0pQAobNDR85T1nLumUYgUTtKm4d21iX2L7WqKq9dW8NGJ+2vX0etZd+Y7UeuqsxDXm9+5ZA==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dependencies:
+      '@types/node': 20.3.3
+      playwright-core: 1.35.1
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
@@ -3004,6 +3018,12 @@ packages:
       sonic-boom: 3.3.0
       thread-stream: 2.3.0
     dev: false
+
+  /playwright-core@1.35.1:
+    resolution: {integrity: sha512-pNXb6CQ7OqmGDRspEjlxE49w+4YtR6a3X6mT1hZXeJHWmsEz7SunmvZeiG/+y1yyMZdHnnn73WKYdtV1er0Xyg==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dev: true
 
   /postcss@8.4.24:
     resolution: {integrity: sha512-M0RzbcI0sO/XJNucsGjvWU9ERWxb/ytp1w6dKtxTKgixdtQDq4rmx/g8W1hnaheq9jgwL/oyEdH5Bc4WwJKMqg==}

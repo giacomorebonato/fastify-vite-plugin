@@ -2,7 +2,7 @@ import appRoot from 'app-root-path'
 import type { FastifyError, FastifyInstance } from 'fastify'
 import Fs from 'node:fs/promises'
 import Path from 'node:path'
-import { ViteDevServer } from 'vite'
+import type { ViteDevServer } from 'vite'
 
 const defaultOptions = {
   sourceDir: 'dist',

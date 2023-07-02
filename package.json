@@ -5,9 +5,10 @@
   "description": "Integrate Vite SPA into a Fastify application",
   "main": "dist/vite-plugin.js",
   "scripts": {
+    "test": "npx playwright test tests/example.spec.ts",
+    "test:server": "node ./examples/server.js",
     "build": "del 'tsconfig.tsbuildinfo' 'dist' && tsc",
-    "release": "release-it --'hooks.before:init=pnpm build'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "release": "release-it --'hooks.before:init=pnpm build'"
   },
   "keywords": [
     "fastify",
@@ -17,6 +18,7 @@
   "author": "Giacomo Rebonato",
   "license": "ISC",
   "devDependencies": {
+    "@playwright/test": "^1.35.1",
     "@tsconfig/node20": "^1.0.2",
     "@types/node": "^20.3.3",
     "del-cli": "^5.0.0",
