@@ -77,3 +77,5 @@ export const fastifyVitePlugin = async (
 
   next()
 }
+
+export default fastifyVitePlugin
