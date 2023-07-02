@@ -3,7 +3,7 @@
   "name": "fastify-vite-plugin",
   "version": "0.0.10",
   "description": "Integrate Vite SPA into a Fastify application",
-  "main": "dist/vite-plugin.js",
+  "main": "dist/fastify-vite-plugin.js",
   "scripts": {
     "test": "npx playwright test",
     "test:server": "node ./examples/server.js",
