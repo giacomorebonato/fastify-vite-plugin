@@ -1,7 +1,7 @@
 # vite-plugin-ts
 
-A Fastify plugin to integrate a Vite SPA into the current project.  
-It doesn't aim to deal with server side rendering, but you can still do that from your Fastify application.
+A Fastify plugin to integrate a Vite **SPA** into the current project.  
+It doesn't aim to deal with server side rendering, but you can still do that from your Fastify application. It could be an interesting use case to render HTML only if the request is made by a bot. A bot can be detected using [isbot package](https://www.npmjs.com/package/isbot).
 It's configured to not ship Vite in production and to only serve its produced assets.
 
 ## Usage
