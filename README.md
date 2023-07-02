@@ -12,7 +12,11 @@ import { fastifyVitePlugin } from 'fastify-vite-plugin'
 import Fastify from 'fastify'
 
 const app = Fastify()
-  
+
+// place your routes before the plugin registration
+// otherwise the "catch all" route that renders index.html
+// for the SPA will take precedence
+
 await app.register(fastifyVitePlugin)
 
 await app.listen({
