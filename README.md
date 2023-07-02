@@ -1,3 +1,6 @@
+* ![release workflow](https://github.com/github/docs/actions/workflows/release.yml/badge.svg)
+* ![playwright workflow](https://github.com/github/docs/actions/workflows/playwright.yml/badge.svg)
+
 # vite-plugin-ts
 
 A Fastify plugin to integrate a Vite **SPA** into the current project.  
