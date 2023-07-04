@@ -2,8 +2,9 @@
 
 # vite-plugin-ts
 
-A Fastify plugin to integrate a Vite **SPA** into the current project.  
-It doesn't aim to deal with server side rendering, but you can still do that from your Fastify application. It could be an interesting use case to render HTML only if the request is made by a bot. A bot can be detected using [isbot package](https://www.npmjs.com/package/isbot).
+A Fastify plugin to integrate a Vite **SPA** into the current project and serving both frontend and backend from the same host.  
+It doesn't aim to deal with server side rendering, but you can still do that from your Fastify application.  
+It could be an interesting use case to render HTML only if the request is made by a bot. A bot can be detected using [isbot package](https://www.npmjs.com/package/isbot).
 It's configured to not ship Vite in production and to only serve its produced assets.
 
 ## Usage
@@ -59,4 +60,6 @@ The following options need to be specified if they are changed in `vite.config.t
 
 ## Requirements
 
-It assumes index.html is placed in the root of the project.
+* it assumes index.html is placed in the root of the project
+* its assumes `npx vite build` is executed before starting the application with `NODE_ENV=production`
+  * if you are using TypeScript, it should be in the same step where you compile your code to JavaScript
