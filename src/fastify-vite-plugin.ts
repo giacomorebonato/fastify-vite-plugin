@@ -13,7 +13,8 @@ const interestingFiles = [
   'index.html',
   'manifest',
   'sw',
-  'workbox'
+  'workbox',
+  'registerSW'
 ]
 
 export const fastifyVitePlugin = async (
