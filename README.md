@@ -50,6 +50,9 @@ export default defineConfig({
 
 ```
 
+The above configuration will just work in dev mode.  
+When you do `npx vite build` for `NODE_ENV=production` make sure that the output is located into `/dist/assets`.
+
 ## Options
 
 The following options need to be specified if they are changed in `vite.config.ts.`
