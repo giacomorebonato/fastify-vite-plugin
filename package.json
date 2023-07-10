@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "fastify-vite-plugin",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Integrate Vite SPA into a Fastify application",
   "main": "dist/fastify-vite-plugin.js",
   "scripts": {
