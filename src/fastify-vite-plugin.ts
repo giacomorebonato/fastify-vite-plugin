@@ -36,7 +36,7 @@ export const fastifyVitePlugin = async (
     for (let filename of filenames) {
       const stats = await Fs.lstat(Path.join(distRoot, filename))
       const isInteresting = interestingFiles.some((interesting) => {
-        return filename.startsWith(interesting) || filename.endsWith('.png')
+        return filename.startsWith(interesting) || filename.endsWith('.png') || filename.endsWith('.jpg') || filename.endsWith('.txt')
       })
 
       if (stats.isFile() && isInteresting) {
