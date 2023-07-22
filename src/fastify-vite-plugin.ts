@@ -16,6 +16,7 @@ const interestingFiles = [
   'workbox',
   'registerSW'
 ]
+const interestingExtensions = ['.png', '.webp', '.svg', '.jpg', '.txt', '.html', '.ico', '.webmanifest']
 
 export const fastifyVitePlugin = async (
   fastify: FastifyInstance,
@@ -36,7 +37,7 @@ export const fastifyVitePlugin = async (
     for (let filename of filenames) {
       const stats = await Fs.lstat(Path.join(distRoot, filename))
       const isInteresting = interestingFiles.some((interesting) => {
-        return filename.startsWith(interesting) || filename.endsWith('.png') || filename.endsWith('.jpg') || filename.endsWith('.txt')
+        return filename.startsWith(interesting) || interestingExtensions.some((ext) => filename.endsWith(ext))
       })
 
       if (stats.isFile() && isInteresting) {
