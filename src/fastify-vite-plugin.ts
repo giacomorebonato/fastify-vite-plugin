@@ -14,7 +14,8 @@ const interestingFiles = [
   'manifest',
   'sw',
   'workbox',
-  'registerSW'
+  'registerSW',
+  'sitemap.xml'
 ]
 const interestingExtensions = ['.png', '.webp', '.svg', '.jpg', '.txt', '.html', '.ico', '.webmanifest']
 
