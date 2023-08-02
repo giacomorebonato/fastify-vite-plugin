@@ -2,12 +2,16 @@ import appRoot from 'app-root-path'
 import type { FastifyError, FastifyInstance } from 'fastify'
 import Fs from 'node:fs/promises'
 import Path from 'node:path'
-import type { ViteDevServer } from 'vite'
+import type { InlineConfig, ViteDevServer } from 'vite'
 
 const defaultOptions = {
   sourceDir: 'dist',
-  viteAssetsDir: '/assets/'
+  viteAssetsDir: '/assets/',
 } as const
+
+type VitePluginOptions = typeof defaultOptions & {
+  viteConfig?: InlineConfig
+}
 
 const interestingFiles = [
   'index.html',
@@ -21,7 +25,7 @@ const interestingExtensions = ['.png', '.webp', '.svg', '.jpg', '.txt', '.html',
 
 export const fastifyVitePlugin = async (
   fastify: FastifyInstance,
-  options: Partial<typeof defaultOptions>,
+  options: Partial<VitePluginOptions>,
   next: (error?: FastifyError) => void
 ): Promise<void> => {
   const finalOptions = {...defaultOptions, ...options}
@@ -60,10 +64,12 @@ export const fastifyVitePlugin = async (
     await fastify.register(import('@fastify/express'))
     const { createServer: createViteServer } = await import('vite')
 
-    vite = await createViteServer({
+    const defaultConfig: InlineConfig = {
       server: { middlewareMode: true },
       appType: 'custom',
-    })
+    }
+    const viteConfig = options.viteConfig ? {...defaultConfig, ...options.viteConfig} : defaultConfig
+    vite = await createViteServer(viteConfig)
     fastify.use(vite.middlewares)
 
     fastify.get('*', async (request, reply) => {
