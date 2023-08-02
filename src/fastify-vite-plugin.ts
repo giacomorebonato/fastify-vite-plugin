@@ -21,7 +21,26 @@ const interestingFiles = [
   'registerSW',
   'sitemap.xml'
 ]
+declare global {
+  var vite: ViteDevServer;
+}
 const interestingExtensions = ['.png', '.webp', '.svg', '.jpg', '.txt', '.html', '.ico', '.webmanifest']
+
+const defaultViteConfig: InlineConfig = {
+  server: { middlewareMode: true },
+  appType: 'custom',
+};
+const getViteServer = async (viteConfig: InlineConfig = defaultViteConfig) => {
+  if (globalThis.vite) {
+    return globalThis.vite
+  }
+  const finalConfig = {...defaultViteConfig, ...viteConfig}
+  const { createServer: createViteServer } = await import('vite')
+
+  globalThis.vite = await createViteServer(finalConfig)
+
+  return globalThis.vite;
+}
 
 export const fastifyVitePlugin = async (
   fastify: FastifyInstance,
@@ -62,14 +81,8 @@ export const fastifyVitePlugin = async (
     })
   } else {
     await fastify.register(import('@fastify/express'))
-    const { createServer: createViteServer } = await import('vite')
 
-    const defaultConfig: InlineConfig = {
-      server: { middlewareMode: true },
-      appType: 'custom',
-    }
-    const viteConfig = options.viteConfig ? {...defaultConfig, ...options.viteConfig} : defaultConfig
-    vite = await createViteServer(viteConfig)
+    vite = await getViteServer(options.viteConfig)
     fastify.use(vite.middlewares)
 
     fastify.get('*', async (request, reply) => {
