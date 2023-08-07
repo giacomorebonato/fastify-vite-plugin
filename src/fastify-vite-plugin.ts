@@ -5,10 +5,10 @@ import Path from 'node:path'
 import { debounce } from 'radash'
 import type { InlineConfig, ViteDevServer } from 'vite'
 
-const closeVite = debounce({delay: 2_000}, (request: any) => {
+const closeVite = debounce({delay: 2_000}, async (request: any) => {
   request.server.log.info('Closing vite')
 
-  globalThis.vite?.close()
+  await globalThis.vite?.close()
 })
 
 const defaultOptions = {
@@ -55,6 +55,7 @@ export const fastifyVitePlugin = async (
   options: Partial<VitePluginOptions> = {},
   next: (error?: FastifyError) => void
 ): Promise<void> => {
+  closeVite.cancel()
   const finalOptions = {...defaultOptions, ...options}
   const NODE_ENV = process.env.NODE_ENV || 'development'
 
