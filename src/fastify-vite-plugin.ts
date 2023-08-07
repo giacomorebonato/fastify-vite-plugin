@@ -2,7 +2,14 @@ import appRoot from 'app-root-path'
 import type { FastifyError, FastifyInstance } from 'fastify'
 import Fs from 'node:fs/promises'
 import Path from 'node:path'
+import { debounce } from 'radash'
 import type { InlineConfig, ViteDevServer } from 'vite'
+
+const closeVite = debounce({delay: 2_000}, (request: any) => {
+  request.server.log.info('Closing vite')
+
+  globalThis.vite?.close()
+})
 
 const defaultOptions = {
   sourceDir: 'dist',
@@ -11,6 +18,7 @@ const defaultOptions = {
 
 type VitePluginOptions = typeof defaultOptions & {
   viteConfig?: InlineConfig
+  disableViteInDev: boolean
 }
 
 const interestingFiles = [
@@ -27,7 +35,7 @@ declare global {
 const interestingExtensions = ['.png', '.webp', '.svg', '.jpg', '.txt', '.html', '.ico', '.webmanifest']
 
 const defaultViteConfig: InlineConfig = {
-  server: { middlewareMode: true },
+  server: { middlewareMode: true, open: false },
   appType: 'custom',
 };
 const getViteServer = async (viteConfig: InlineConfig = defaultViteConfig) => {
@@ -44,7 +52,7 @@ const getViteServer = async (viteConfig: InlineConfig = defaultViteConfig) => {
 
 export const fastifyVitePlugin = async (
   fastify: FastifyInstance,
-  options: Partial<VitePluginOptions>,
+  options: Partial<VitePluginOptions> = {},
   next: (error?: FastifyError) => void
 ): Promise<void> => {
   const finalOptions = {...defaultOptions, ...options}
@@ -79,10 +87,11 @@ export const fastifyVitePlugin = async (
     fastify.get('*', async (request, reply) => {
       reply.type('text/html').send(indexHtml)
     })
-  } else {
+  } else if (!options.disableViteInDev) {
     await fastify.register(import('@fastify/express'))
 
     vite = await getViteServer(options.viteConfig)
+
     fastify.use(vite.middlewares)
 
     fastify.get('*', async (request, reply) => {
@@ -91,11 +100,9 @@ export const fastifyVitePlugin = async (
 
       reply.type('text/html').send(transformed)
     })
-  }
 
-  fastify.addHook('onClose', async () => {
-    await vite?.close()
-  })
+    fastify.addHook('onClose', closeVite as any)
+  }
 
   next()
 }
