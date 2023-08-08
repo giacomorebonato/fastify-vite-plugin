@@ -14,6 +14,7 @@ const closeVite = debounce({delay: 2_000}, async (request: any) => {
 const defaultOptions = {
   sourceDir: 'dist',
   viteAssetsDir: '/assets/',
+  enableSSR: false            // https://vite-plugin-ssr.com/renderPage#optional
 } as const
 
 type VitePluginOptions = typeof defaultOptions & {
@@ -95,12 +96,28 @@ export const fastifyVitePlugin = async (
 
     fastify.use(vite.middlewares)
 
-    fastify.get('*', async (request, reply) => {
-      const htmlFile = await Fs.readFile(Path.join(appRoot.path, 'index.html'), 'utf-8')
-      const transformed = await vite.transformIndexHtml(request.url, htmlFile)
+    if (options.enableSSR) {
+      const { renderPage } = await import('vite-plugin-ssr/server')
 
-      reply.type('text/html').send(transformed)
-    })
+      fastify.get('*', async (request, reply) => {
+        const pageContextInit = { urlOriginal: request.originalUrl }
+        const pageContext = await renderPage(pageContextInit)
+        if (pageContext.httpResponse === null) {
+          return
+        }
+        const { body, statusCode, headers } = pageContext.httpResponse
+        headers.forEach(([name, value]) => reply.header(name, value))
+
+        reply.status(statusCode).send(body)
+      })
+    } else {
+      fastify.get('*', async (request, reply) => {
+        const htmlFile = await Fs.readFile(Path.join(appRoot.path, 'index.html'), 'utf-8')
+        const transformed = await vite.transformIndexHtml(request.url, htmlFile)
+
+        reply.type('text/html').send(transformed)
+      })
+    }
 
     fastify.addHook('onClose', closeVite as any)
   }
