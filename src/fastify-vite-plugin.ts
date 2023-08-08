@@ -102,6 +102,12 @@ export const fastifyVitePlugin = async (
       fastify.get('*', async (request, reply) => {
         const pageContextInit = { urlOriginal: request.originalUrl }
         const pageContext = await renderPage(pageContextInit)
+
+        if (pageContext.errorWhileRendering) {
+          reply.status(500).send(pageContext.errorWhileRendering)
+          return
+        }
+
         if (pageContext.httpResponse === null) {
           return
         }
